@@ -1,0 +1,14 @@
+.track-menu-root{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5px;
+}
+
+.track-menu{
+    min-width: 120px;
+}
+
+.add-track-icon{
+    height: initial;
+}

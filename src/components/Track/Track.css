@@ -1,0 +1,42 @@
+.play-button-wrapper{
+  position: relative;
+}
+
+.play-button{
+  /*border: 1px black solid;*/
+  /*border-radius:50%;*/
+  padding: 5px;
+}
+
+.circular-progress{
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  z-index: 1;
+}
+.track-title{
+  font-size: 1.1rem;
+}
+
+.album-title{
+    font-size: 1rem;
+}
+
+.volume-icon{
+flex:1;
+  margin-right:5px;
+color: rgba(0, 0, 0, 0.54);
+  margin-left: -20px;
+}
+
+.volume-bar{
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.track-bar-title{
+  position: absolute;
+  top: 50%;
+  left:-20%;
+}

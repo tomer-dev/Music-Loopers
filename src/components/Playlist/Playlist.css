@@ -1,0 +1,37 @@
+.playlist-root{
+  min-width:250px;
+  max-width:500px;
+  margin: auto;
+}
+
+.playlist-actions{
+  margin: 15px;
+
+}
+
+.playlist-actions>Button{
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.track-title{
+  font-size: 1.1rem;
+}
+
+.album-title{
+    font-size: 1rem;
+}
+
+.volume-icon{
+flex:1;
+  margin-right:5px;
+color: rgba(0, 0, 0, 0.54);
+  margin-left: -20px;
+
+}
+
+.volume-bar{
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
