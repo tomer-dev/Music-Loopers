@@ -40,3 +40,7 @@ color: rgba(0, 0, 0, 0.54);
   top: 50%;
   left:-20%;
 }
+
+.bpm-title {
+    cursor: pointer;
+}

@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
 import './Playlist.css';
-import {
-    List,
-} from '@material-ui/core';
-
-import {
-    Button, Divider, Typography
-} from '@material-ui/core';
+import {Button, Divider, List, Typography,} from '@material-ui/core';
 
 import Track from '../Track';
 import TrackMenu from '../TrackMenu';
@@ -36,20 +30,35 @@ class Playlist extends Component {
      */
     playSyncToggle = () => {
         let {isSyncing} = this.state;
-        let leaderBPM;
-
         isSyncing = !isSyncing && this.hasTracks();
-
-        if(isSyncing) {
-            let {bpm} = this.getLeaderTrack();
-            leaderBPM = bpm;
-        }
 
         this.setState({
             isSyncing,
-            leaderBPM,
             isPlayingAll: false
         });
+    };
+
+
+    /**
+     * It updates the duration of the loaded track into the metadata list.
+     * In sync mode- it reorders the tracks by their length(duration)
+     * @param track the data-object model
+     * @param duration the track's length
+     */
+    handleTrackLoaded = (track, duration) => {
+        let {Metadata, isSyncing} = this.state;
+
+        let trackMetadata = this.findTrackById(Metadata, track.Id);
+        Object.assign(trackMetadata, {duration});
+
+        this.setState({
+            Metadata
+        });
+
+        if (isSyncing) {
+            this.sortByTrackLength();
+            this.updateLeaderBPM();
+        }
     };
 
     /** It returns true if the playlist contains tracks **/
@@ -94,24 +103,10 @@ class Playlist extends Component {
         });
     };
 
-    /**
-     * It updates the duration of the loaded track into the metadata list.
-     * In sync mode- it reorders the tracks by their length(duration)
-     * @param track the data-object model
-     * @param duration the track's length
-     */
-    handleTrackLoaded = (track, duration) => {
-        let {Metadata, isSyncing} = this.state;
-
-        let trackMetadata = this.findTrackById(Metadata, track.Id);
-        Object.assign(trackMetadata, {duration});
-
-        isSyncing? this.sortByTrackLength(): '';
-
-        this.setState({
-            Metadata
-        });
-    };
+    updateLeaderBPM() {
+        let {bpm} = this.getLeaderTrack();
+        this.setState({leaderBPM: bpm});
+    }
 
     findTrackById = (list, trackId) =>{
         return list.find(item=> item.Id === trackId);
@@ -169,6 +164,7 @@ class Playlist extends Component {
                        leaderBPM={leaderBPM}
                        onTrackRemove={this.removeTrack}
                        onLoaded={this.handleTrackLoaded}
+                       onLeaderBPMChange={(bpm) => this.setState({leaderBPM: bpm})}
                 />);
         });
 
